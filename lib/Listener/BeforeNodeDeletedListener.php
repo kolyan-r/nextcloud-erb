@@ -2,7 +2,7 @@
 
 namespace OCA\External_Recycle_Bin\Listener;
 
-use OCA\External_Recycle_Bin\Application;
+use OCA\External_Recycle_Bin\AppInfo\Application;
 use OCP\EventDispatcher\Event;
 use OCP\Files\Events\Node\BeforeNodeDeletedEvent;
 

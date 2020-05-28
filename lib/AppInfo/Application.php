@@ -10,7 +10,7 @@ use OCP\ILogger;
 
 /**
  * Class Application
- * @package OCA\External_Recycle_Bin
+ * @package OCA\External_Recycle_Bin\AppInfo
  */
 class Application extends App
 {
