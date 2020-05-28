@@ -1,4 +1,3 @@
 <?php
 
-$app = new \OCA\External_Recycle_Bin\Application();
-$app->registerEventListeners();
+\OC::$server->query(\OCA\External_Recycle_Bin\AppInfo\Application::class);

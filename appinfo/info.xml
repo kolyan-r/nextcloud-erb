@@ -4,7 +4,7 @@
     <id>external_recycle_bin</id>
     <name>External recycle bin</name>
     <summary>App for copy deleted files</summary>
-    <description><![CDATA[This is a tool for copy file to external server folder before delete]]></description>
+    <description>This is a tool for copy file to external server folder before delete</description>
     <version>1.0.0</version>
     <licence>agpl</licence>
     <author mail="nikordev@gmail.com" >Nikolay Ryakhovskiy</author>

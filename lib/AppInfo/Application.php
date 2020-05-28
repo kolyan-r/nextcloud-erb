@@ -1,11 +1,11 @@
 <?php
 
-namespace OCA\External_Recycle_Bin;
+namespace OCA\External_Recycle_Bin\AppInfo;
 
 use OCP\AppFramework\App;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Files\Events\Node\BeforeNodeDeletedEvent;
-use OCA\External_Recycle_Bin\Events\BeforeNodeDeletedListener;
+use OCA\External_Recycle_Bin\Listener\BeforeNodeDeletedListener;
 use OCP\ILogger;
 
 /**
@@ -14,12 +14,16 @@ use OCP\ILogger;
  */
 class Application extends App
 {
+    public const APP_ID = 'external_recycle_bin';
+
     /**
      * Application constructor.
      */
     public function __construct()
     {
-        parent::__construct('external_recycle_bin');
+        parent::__construct(self::APP_ID);
+
+        $this->registerEventListeners();
     }
 
     /**
@@ -33,7 +37,7 @@ class Application extends App
     /**
      * @return void
      */
-    public function registerEventListeners(): void
+    protected function registerEventListeners(): void
     {
         $this->registerBeforeNodeDeletedListener();
     }

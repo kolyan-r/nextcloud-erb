@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\External_Recycle_Bin\Events;
+namespace OCA\External_Recycle_Bin\Listener;
 
 use OCA\External_Recycle_Bin\Application;
 use OCP\EventDispatcher\Event;
@@ -8,7 +8,7 @@ use OCP\Files\Events\Node\BeforeNodeDeletedEvent;
 
 /**
  * Class BeforeNodeDeletedListener
- * @package OCA\External_Recycle_Bin\Events
+ * @package OCA\External_Recycle_Bin\Listener
  */
 class BeforeNodeDeletedListener
 {
