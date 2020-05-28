@@ -5,6 +5,7 @@ namespace OCA\External_Recycle_Bin\Listener;
 use OCA\External_Recycle_Bin\AppInfo\Application;
 use OCP\EventDispatcher\Event;
 use OCP\Files\Events\Node\BeforeNodeDeletedEvent;
+use OC\Files\Node\Node;
 
 /**
  * Class BeforeNodeDeletedListener
@@ -18,20 +19,31 @@ class BeforeNodeDeletedListener
     protected $app;
 
     /**
-     * @var BeforeNodeDeletedEvent
+     * @var GenericEvent
      */
     protected $event;
+
+    /**
+     * @var Node
+     */
+    protected $node;
 
     /**
      * BeforeNodeDeletedListener constructor.
      *
      * @param Application $app
-     * @param BeforeNodeDeletedEvent $event
+     * @param GenericEvent $event
+     *
+     * @throws \Exception
      */
-    public function __construct(Application $app, BeforeNodeDeletedEvent $event)
+    public function __construct(Application $app, GenericEvent $event)
     {
         $this->app = $app;
         $this->event = $event;
+        $this->node = $event->getSubject();
+        if (!$this->node instanceof Node) {
+            throw new \Exception('Subject not valid');
+        }
     }
 
     /**
@@ -39,8 +51,8 @@ class BeforeNodeDeletedListener
      */
     public function handle(): void
     {
-        $path = $this->event->getNode()->getPath();
+        $path = $this->node->getPath();
 
-        $this->app->getLogger()->alert($path);
+        $this->app->getLogger()->error($path);
     }
 }

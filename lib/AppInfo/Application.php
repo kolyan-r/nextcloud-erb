@@ -3,8 +3,7 @@
 namespace OCA\External_Recycle_Bin\AppInfo;
 
 use OCP\AppFramework\App;
-use OCP\EventDispatcher\IEventDispatcher;
-use OCP\Files\Events\Node\BeforeNodeDeletedEvent;
+use OCP\EventDispatcher\GenericEvent;
 use OCA\External_Recycle_Bin\Listener\BeforeNodeDeletedListener;
 use OCP\ILogger;
 
@@ -31,7 +30,7 @@ class Application extends App
      */
     public function getLogger()
     {
-        return $this->getContainer()->query(ILogger::class);
+        return $this->getContainer()->getServer()->getLogger();
     }
 
     /**
@@ -47,7 +46,7 @@ class Application extends App
      */
     protected function getEventDispatcher()
     {
-        return $this->getContainer()->query(IEventDispatcher::class);
+        return $this->getContainer()->getServer()->getEventDispatcher();
     }
 
     /**
@@ -56,8 +55,8 @@ class Application extends App
     protected function registerBeforeNodeDeletedListener(): void
     {
         $this->getEventDispatcher()->addListener(
-            BeforeNodeDeletedEvent::class,
-            function (BeforeNodeDeletedEvent $event) {
+            '\OCP\Files::preDelete',
+            function (GenericEvent $event) {
                 (new BeforeNodeDeletedListener($this, $event))->handle();
             }
         );
